@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { useState, type FormEvent } from 'react'
 import { ArrowLeft, LogIn } from 'lucide-react'
 import { Logo } from '@/components/logo'
-import { TricolorBar } from '@/components/tricolor-bar'
 
 const fieldClass =
   'w-full rounded-lg border border-input bg-card px-3.5 py-2.5 text-sm text-foreground shadow-sm outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-gold focus:ring-2 focus:ring-gold/40'
@@ -49,7 +48,6 @@ export default function AdminLoginPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <TricolorBar />
       <main className="flex flex-1 items-center justify-center px-4 py-12">
         <div className="w-full max-w-sm">
           <div className="rounded-2xl border-2 border-gold/70 bg-card p-8 shadow-md">

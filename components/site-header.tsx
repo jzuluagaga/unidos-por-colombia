@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ShieldCheck } from 'lucide-react'
 import { Logo } from '@/components/logo'
-import { TricolorBar } from '@/components/tricolor-bar'
 
 export function SiteHeader({
   compact = false,
@@ -10,8 +9,7 @@ export function SiteHeader({
   compact?: boolean
 }) {
   return (
-    <header className="sticky top-0 z-30 bg-background/95 backdrop-blur">
-      <TricolorBar />
+    <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex w-full max-w-5xl items-center gap-3 px-4 py-3 sm:gap-4 sm:px-6">
         <Link href="/" className="flex items-center gap-3 sm:gap-4">
           <Logo size={compact ? 'sm' : 'md'} />
@@ -26,7 +24,6 @@ export function SiteHeader({
           </span>
         </Link>
       </div>
-      <div className="h-px w-full bg-border" />
     </header>
   )
 }

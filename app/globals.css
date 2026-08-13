@@ -44,8 +44,8 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-roboto-condensed), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-amaranth), ui-serif, Georgia, serif;
 
   --color-navy: var(--navy);
   --color-navy-foreground: var(--navy-foreground);
@@ -60,31 +60,46 @@
 
 :root {
   color-scheme: light;
-  --background: #f6f7f9;
-  --foreground: #1a2b4a;
+  /* Paleta oficial — Manual de Identidad Visual, Corporación Gégona:
+     verde oscuro #0C5626, verde medio #077D41, azul marino #0B2F60,
+     negro #000000, blanco #FFFFFF. Los tokens de abajo mantienen sus
+     NOMBRES originales (--navy, --gold, --gold-soft, --cream) porque
+     decenas de componentes ya los consumen vía clases Tailwind — solo
+     cambian los valores hex, no hay que tocar esos componentes. */
+  --background: #f7f8f7;
+  --foreground: #000000;
   --card: #ffffff;
-  --card-foreground: #1a2b4a;
+  --card-foreground: #000000;
   --popover: #ffffff;
-  --popover-foreground: #1a2b4a;
-  --primary: #1a2b4a;
+  --popover-foreground: #000000;
+  --primary: #0c5626;
   --primary-foreground: #ffffff;
-  --secondary: #eef1f5;
-  --secondary-foreground: #1a2b4a;
-  --muted: #eef1f5;
-  --muted-foreground: #5b6a82;
-  --accent: #f7f1dd;
-  --accent-foreground: #1a2b4a;
+  --secondary: #eef1ef;
+  --secondary-foreground: #0b2f60;
+  --muted: #eef1ef;
+  --muted-foreground: #5b6670;
+  --accent: #eaf4ee;
+  --accent-foreground: #0c5626;
+  /* Único color fuera de la paleta oficial, y a propósito: ningún tono de
+     verde/azul/negro comunica "urgente/peligro" con la fiabilidad de un
+     rojo — convención de UI muy asentada, y este es un sitio de ayuda en
+     emergencia donde una mala lectura de un caso urgente sí importa. Se
+     usa exclusivamente en el badge de estado "URGENTE" (ver status-badge
+     y statusMeta en lib/data.ts) — nunca en el isotipo, botones ni
+     superficies grandes. No es un color nuevo: ya estaba en el tema
+     anterior, aquí simplemente se conserva.
+     --destructive comparte el mismo valor por la misma razón. */
   --destructive: #c0392b;
-  --border: #e3e7ee;
-  --input: #d8dde6;
-  --ring: #c9a227;
+  --border: #e3e7e5;
+  --input: #d7dbd9;
+  --ring: #077d41;
 
-  --navy: #1a2b4a;
+  --navy: #0b2f60;
   --navy-foreground: #ffffff;
-  --gold: #c9a227;
-  --gold-soft: #e6d29a;
-  --cream: #f7f1dd;
-  --success: #2f8f4e;
+  --gold: #077d41;
+  --gold-soft: #cfe8db;
+  --cream: #eaf4ee;
+  --success: #077d41;
   --success-foreground: #ffffff;
   --urgent: #c0392b;
   --urgent-foreground: #ffffff;

@@ -7,7 +7,6 @@ import { LogOut, Pencil, Plus, Trash2 } from 'lucide-react'
 import { AdminEntryForm, type EntryDraft } from '@/components/admin-entry-form'
 import { Logo } from '@/components/logo'
 import { StatusBadge } from '@/components/status-badge'
-import { TricolorBar } from '@/components/tricolor-bar'
 import type { Category, Entry } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -120,10 +119,13 @@ export function AdminPanel({
     <div className="flex min-h-screen flex-col bg-background">
       {/* Barra superior del panel */}
       <header className="sticky top-0 z-20 bg-navy text-navy-foreground">
-        <TricolorBar />
         <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <div className="flex items-center gap-3">
-            <Logo size="sm" />
+            <Logo
+              size="sm"
+              variant="dark"
+              className="rounded-full bg-white p-1.5 shadow-sm ring-1 ring-black/5"
+            />
             <div className="leading-tight">
               <p className="font-serif text-base font-bold uppercase tracking-tight sm:text-lg">
                 Panel de administración

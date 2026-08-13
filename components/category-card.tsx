@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { CategoryIcon } from '@/components/category-icon'
-import { CornerAccents } from '@/components/corner-accents'
 import type { AccentColor, Category } from '@/lib/types'
 import { cn } from '@/lib/utils'
 
@@ -22,10 +21,8 @@ export function CategoryCard({
   return (
     <Link
       href={`/${category.slug}`}
-      className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-navy/15 bg-card p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-gold hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:p-7"
+      className="group flex flex-col justify-between rounded-lg border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:p-7"
     >
-      <CornerAccents className="opacity-0 transition-opacity group-hover:opacity-100" />
-
       <div className="flex items-start justify-between gap-4">
         <span
           className={cn(

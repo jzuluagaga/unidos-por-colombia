@@ -10,7 +10,7 @@ const labelClass = 'mb-1.5 block text-sm font-semibold text-navy'
 // Número fijo del admin: el formulario público no guarda nada en la base de
 // datos, solo arma el mensaje y manda al reportante a WhatsApp. El admin
 // revisa ahí y decide manualmente qué entra al sitio (panel de administración).
-const WHATSAPP_NUMBER = '573507919323'
+const WHATSAPP_NUMBER = '573054454690'
 
 interface ReportFields {
   nombre: string

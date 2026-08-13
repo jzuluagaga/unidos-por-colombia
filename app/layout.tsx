@@ -1,17 +1,19 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Playfair_Display, Source_Sans_3 } from 'next/font/google'
+import { Amaranth, Roboto_Condensed } from 'next/font/google'
+import { WhatsAppButton } from '@/components/whatsapp-button'
 import './globals.css'
 
-const playfair = Playfair_Display({
+const amaranth = Amaranth({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  weight: ['400', '700'],
+  variable: '--font-amaranth',
   display: 'swap',
 })
 
-const sourceSans = Source_Sans_3({
+const robotoCondensed = Roboto_Condensed({
   subsets: ['latin'],
-  variable: '--font-source-sans',
+  variable: '--font-roboto-condensed',
   display: 'swap',
 })
 
@@ -24,7 +26,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   colorScheme: 'light',
-  themeColor: '#1a2b4a',
+  themeColor: '#0b2f60',
 }
 
 export default function RootLayout({
@@ -35,10 +37,11 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${playfair.variable} ${sourceSans.variable} bg-background`}
+      className={`${amaranth.variable} ${robotoCondensed.variable} bg-background`}
     >
       <body className="font-sans antialiased">
         {children}
+        <WhatsAppButton />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
