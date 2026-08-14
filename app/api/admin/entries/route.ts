@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
-import { isCategorySlug } from '@/lib/data'
+import { getCategoryBySlug } from '@/lib/categories'
 import { createEntry } from '@/lib/entries'
 import { ENTRY_STATUSES } from '@/lib/types'
 
@@ -21,12 +21,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Datos inválidos.' }, { status: 400 })
   }
   const data = parsed.data
-  if (!isCategorySlug(data.category)) {
+  const category = await getCategoryBySlug(data.category)
+  if (!category) {
     return NextResponse.json({ error: 'Categoría inválida.' }, { status: 400 })
   }
 
   const entry = await createEntry({
     category: data.category,
+    categoryId: category.id,
     title: data.title,
     subtitle: data.subtitle,
     description: data.description,

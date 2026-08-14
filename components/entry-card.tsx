@@ -6,10 +6,15 @@ import type { Entry } from '@/lib/types'
 const ADMIN_CONTACT_EMAIL =
   process.env.NEXT_PUBLIC_ADMIN_CONTACT_EMAIL ?? 'contacto@unidosporcolombia.org'
 
-export function EntryCard({ entry }: { entry: Entry }) {
-  // El contacto de una persona desaparecida no se expone públicamente: se
-  // protege al reportante/familia detrás de un correo de administración.
-  const isSensitiveContact = entry.category === 'desaparecidos'
+export function EntryCard({
+  entry,
+  isSensitiveContact,
+}: {
+  entry: Entry
+  /** category.isSensitiveContact — el contacto no se expone públicamente,
+   * se protege al reportante/familia detrás de un correo de administración. */
+  isSensitiveContact: boolean
+}) {
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-navy/15 bg-card shadow-sm transition-shadow hover:shadow-md">
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary">

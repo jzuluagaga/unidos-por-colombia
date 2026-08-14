@@ -1,13 +1,14 @@
 import { CategoryCard } from '@/components/category-card'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
-import { categories } from '@/lib/data'
+import { getCategories } from '@/lib/categories'
 import { getEntryCountByCategory } from '@/lib/entries'
 
 // Conteos moderados en vivo: nunca servir un snapshot estático desactualizado.
 export const dynamic = 'force-dynamic'
 
 export default async function HomePage() {
+  const categories = await getCategories()
   const counts = await Promise.all(
     categories.map((c) => getEntryCountByCategory(c.slug)),
   )

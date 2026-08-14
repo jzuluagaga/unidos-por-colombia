@@ -1,9 +1,10 @@
 import { notFound } from 'next/navigation'
 import { AdminPanel } from '@/components/admin-panel'
-import { categories, categoryMap, isCategorySlug } from '@/lib/data'
+import { getCategories } from '@/lib/categories'
 import { getAllEntriesByCategory } from '@/lib/entries'
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const categories = await getCategories()
   return categories.map((c) => ({ categoria: c.slug }))
 }
 
@@ -16,9 +17,10 @@ export default async function AdminCategoryPage({
   params: Promise<{ categoria: string }>
 }) {
   const { categoria } = await params
-  if (!isCategorySlug(categoria)) notFound()
+  const categories = await getCategories()
+  const category = categories.find((c) => c.slug === categoria)
+  if (!category) notFound()
 
-  const category = categoryMap[categoria]
   const entries = await getAllEntriesByCategory(categoria)
 
   return (

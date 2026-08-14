@@ -4,9 +4,10 @@ import { ArrowLeft } from 'lucide-react'
 import { ReportForm } from '@/components/report-form'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
-import { categories, categoryMap, isCategorySlug } from '@/lib/data'
+import { getCategories, getCategoryBySlug } from '@/lib/categories'
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const categories = await getCategories()
   return categories.map((c) => ({ categoria: c.slug }))
 }
 
@@ -16,9 +17,8 @@ export default async function ReportarPage({
   params: Promise<{ categoria: string }>
 }) {
   const { categoria } = await params
-  if (!isCategorySlug(categoria)) notFound()
-
-  const category = categoryMap[categoria]
+  const category = await getCategoryBySlug(categoria)
+  if (!category) notFound()
 
   return (
     <div className="flex min-h-screen flex-col">

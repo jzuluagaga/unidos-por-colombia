@@ -75,6 +75,7 @@ export async function getAllEntriesByCategory(
 
 export interface EntryInput {
   category: CategorySlug
+  categoryId: string
   title: string
   subtitle: string
   description: string
@@ -85,9 +86,9 @@ export interface EntryInput {
 
 export async function createEntry(input: EntryInput): Promise<Entry> {
   const rows = (await sql`
-    insert into entries (category, title, subtitle, description, photo_url, status, contact)
+    insert into entries (category, category_id, title, subtitle, description, photo_url, status, contact)
     values (
-      ${input.category}, ${input.title}, ${input.subtitle}, ${input.description},
+      ${input.category}, ${input.categoryId}, ${input.title}, ${input.subtitle}, ${input.description},
       ${input.photoUrl ?? null}, ${input.status}, ${input.contact ?? null}
     )
     returning id, category, title, subtitle, description, photo_url, status, contact, updated_at

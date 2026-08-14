@@ -3,7 +3,7 @@ import { Mail, MessageCircle, ShieldCheck } from 'lucide-react'
 import { Logo } from '@/components/logo'
 
 const ADMIN_CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_ADMIN_CONTACT_EMAIL ?? 'contacto@unidosporcolombia.org'
+  process.env.NEXT_PUBLIC_ADMIN_CONTACT_EMAIL ?? 'soporte@corporaciongegona.com'
 const WHATSAPP_NUMBER = '573054454690'
 
 export function SiteFooter() {

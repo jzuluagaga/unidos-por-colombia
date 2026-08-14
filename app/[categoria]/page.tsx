@@ -4,10 +4,11 @@ import { ArrowLeft, Plus, ShieldCheck } from 'lucide-react'
 import { EntryCard } from '@/components/entry-card'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
-import { categories, categoryMap, isCategorySlug } from '@/lib/data'
+import { getCategories, getCategoryBySlug } from '@/lib/categories'
 import { getEntriesByCategory } from '@/lib/entries'
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const categories = await getCategories()
   return categories.map((c) => ({ categoria: c.slug }))
 }
 
@@ -22,9 +23,9 @@ export default async function CategoryPage({
   params: Promise<{ categoria: string }>
 }) {
   const { categoria } = await params
-  if (!isCategorySlug(categoria)) notFound()
+  const category = await getCategoryBySlug(categoria)
+  if (!category) notFound()
 
-  const category = categoryMap[categoria]
   const entries = await getEntriesByCategory(categoria)
 
   return (
@@ -60,7 +61,11 @@ export default async function CategoryPage({
         {entries.length > 0 ? (
           <section className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
             {entries.map((entry) => (
-              <EntryCard key={entry.id} entry={entry} />
+              <EntryCard
+                key={entry.id}
+                entry={entry}
+                isSensitiveContact={category.isSensitiveContact}
+              />
             ))}
           </section>
         ) : (
