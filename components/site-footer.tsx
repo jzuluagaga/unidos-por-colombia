@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Mail, MessageCircle, ShieldCheck } from 'lucide-react'
+import { Globe, Mail, MessageCircle, ShieldCheck } from 'lucide-react'
 import { Logo } from '@/components/logo'
 
 const ADMIN_CONTACT_EMAIL =
@@ -38,6 +38,15 @@ export function SiteFooter() {
               <Mail size={18} strokeWidth={2} />
               {ADMIN_CONTACT_EMAIL}
             </a>
+            <a
+              href="https://corporaciongegona.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-navy-foreground/70 hover:text-gold-soft"
+            >
+              <Globe size={18} strokeWidth={2} />
+              corporaciongegona.com
+            </a>
             <span className="inline-flex items-center gap-2 text-navy-foreground/70">
               <ShieldCheck size={18} strokeWidth={2} className="text-gold" />
               Contenido revisado antes de su publicación
@@ -58,7 +67,14 @@ export function SiteFooter() {
             variant="dark"
             className="rounded-full bg-white p-1.5 shadow-sm ring-1 ring-black/5"
           />
-          <span>Corporación Gégona</span>
+          <a
+            href="https://corporaciongegona.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gold-soft hover:underline"
+          >
+            Corporación Gégona
+          </a>
         </div>
       </div>
     </footer>
