@@ -17,7 +17,7 @@ export function EntryCard({
 }) {
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-navy/15 bg-card shadow-sm transition-shadow hover:shadow-md">
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-secondary">
+      <div className="relative aspect-[2/3] w-full overflow-hidden bg-secondary">
         <Image
           src={entry.photo || '/placeholder.svg'}
           alt={entry.title}
