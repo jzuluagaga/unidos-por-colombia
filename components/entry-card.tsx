@@ -1,10 +1,19 @@
 import Image from 'next/image'
-import { Mail, Phone } from 'lucide-react'
+import { Mail, MessageCircle } from 'lucide-react'
 import { StatusBadge } from '@/components/status-badge'
 import type { Entry } from '@/lib/types'
 
 const ADMIN_CONTACT_EMAIL =
   process.env.NEXT_PUBLIC_ADMIN_CONTACT_EMAIL ?? 'contacto@unidosporcolombia.org'
+
+/** "310 555 0000" -> "573105550000". Los admins escriben el contacto como
+ * texto libre (sin indicativo); asumimos Colombia (+57) si no lo trae ya. */
+function buildWhatsAppUrl(contact: string) {
+  const digits = contact.replace(/\D/g, '')
+  const withCountryCode =
+    digits.startsWith('57') && digits.length > 10 ? digits : `57${digits}`
+  return `https://wa.me/${withCountryCode}`
+}
 
 export function EntryCard({
   entry,
@@ -42,10 +51,15 @@ export function EntryCard({
         </p>
 
         {entry.contact && !isSensitiveContact && (
-          <p className="mt-auto flex items-center gap-2 pt-2 text-sm font-semibold text-navy">
-            <Phone size={16} strokeWidth={2} className="text-gold" />
+          <a
+            href={buildWhatsAppUrl(entry.contact)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto inline-flex w-fit items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2 pt-2 text-sm font-semibold text-white shadow-sm transition-all hover:brightness-105"
+          >
+            <MessageCircle size={16} strokeWidth={2} />
             {entry.contact}
-          </p>
+          </a>
         )}
 
         {entry.contact && isSensitiveContact && (
