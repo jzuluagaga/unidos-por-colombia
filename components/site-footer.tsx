@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { Globe, Mail, MessageCircle, ShieldCheck } from 'lucide-react'
 import { Logo } from '@/components/logo'
+import { FOUNDATION_WHATSAPP_NUMBER } from '@/lib/constants'
 
 const ADMIN_CONTACT_EMAIL =
   process.env.NEXT_PUBLIC_ADMIN_CONTACT_EMAIL ?? 'soporte@corporaciongegona.com'
-const WHATSAPP_NUMBER = '573054454690'
 
 export function SiteFooter() {
   return (
@@ -23,7 +23,7 @@ export function SiteFooter() {
 
           <div className="flex flex-col gap-3 text-sm">
             <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
+              href={`https://wa.me/${FOUNDATION_WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 font-semibold hover:text-gold-soft"

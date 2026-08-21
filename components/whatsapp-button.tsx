@@ -1,11 +1,10 @@
 import { MessageCircle } from 'lucide-react'
-
-const WHATSAPP_NUMBER = '573054454690'
+import { FOUNDATION_WHATSAPP_NUMBER } from '@/lib/constants'
 
 export function WhatsAppButton() {
   return (
     <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}`}
+      href={`https://wa.me/${FOUNDATION_WHATSAPP_NUMBER}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"

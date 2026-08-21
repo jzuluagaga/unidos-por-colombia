@@ -1,10 +1,8 @@
 import Image from 'next/image'
-import { Mail, MessageCircle } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 import { StatusBadge } from '@/components/status-badge'
+import { FOUNDATION_WHATSAPP_NUMBER } from '@/lib/constants'
 import type { Entry } from '@/lib/types'
-
-const ADMIN_CONTACT_EMAIL =
-  process.env.NEXT_PUBLIC_ADMIN_CONTACT_EMAIL ?? 'contacto@unidosporcolombia.org'
 
 /** "310 555 0000" -> "573105550000". Los admins escriben el contacto como
  * texto libre (sin indicativo); asumimos Colombia (+57) si no lo trae ya. */
@@ -15,13 +13,20 @@ function buildWhatsAppUrl(contact: string) {
   return `https://wa.me/${withCountryCode}`
 }
 
+/** Para categorías sensibles: el visitante escribe a la fundación (no al
+ * contacto real, que queda oculto), con un mensaje prellenado del caso. */
+function buildFoundationWhatsAppUrl(entry: Entry) {
+  const message = `Tengo información sobre el caso: ${entry.title} (ID ${entry.id})`
+  return `https://wa.me/${FOUNDATION_WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+}
+
 export function EntryCard({
   entry,
   isSensitiveContact,
 }: {
   entry: Entry
   /** category.isSensitiveContact — el contacto no se expone públicamente,
-   * se protege al reportante/familia detrás de un correo de administración. */
+   * se protege al reportante/familia detrás del WhatsApp de la fundación. */
   isSensitiveContact: boolean
 }) {
   return (
@@ -64,15 +69,13 @@ export function EntryCard({
 
         {entry.contact && isSensitiveContact && (
           <a
-            href={`mailto:${ADMIN_CONTACT_EMAIL}?subject=${encodeURIComponent(
-              `Información sobre: ${entry.title}`,
-            )}&body=${encodeURIComponent(
-              `Tengo información relacionada con el caso "${entry.title}" (ID ${entry.id}).\n\n`,
-            )}`}
-            className="mt-auto inline-flex items-center justify-center gap-2 rounded-full bg-navy px-4 py-2 pt-2 text-sm font-semibold text-navy-foreground transition-colors hover:brightness-110"
+            href={buildFoundationWhatsAppUrl(entry)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-auto inline-flex w-fit items-center justify-center gap-2 rounded-full bg-navy px-4 py-2 pt-2 text-sm font-semibold text-navy-foreground transition-colors hover:brightness-110"
           >
-            <Mail size={16} strokeWidth={2} />
-            Contactar
+            <MessageCircle size={16} strokeWidth={2} />
+            Contactar por WhatsApp
           </a>
         )}
       </div>
