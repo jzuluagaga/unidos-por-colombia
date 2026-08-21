@@ -15,7 +15,14 @@ export async function generateStaticParams() {
 // Datos moderados en vivo: nunca servir un snapshot estático desactualizado.
 export const dynamic = 'force-dynamic'
 
-const VERIFIED_AT = '12 de agosto, 3:00 p. m.'
+/** Fecha de hoy en español (ej. "20 de agosto"). Como la página es
+ * force-dynamic, esto se recalcula en cada request — nunca queda vieja. */
+function getVerifiedAtLabel() {
+  return new Intl.DateTimeFormat('es-CO', {
+    day: 'numeric',
+    month: 'long',
+  }).format(new Date())
+}
 
 export default async function CategoryPage({
   params,
@@ -27,6 +34,7 @@ export default async function CategoryPage({
   if (!category) notFound()
 
   const entries = await getEntriesByCategory(categoria)
+  const verifiedAt = getVerifiedAtLabel()
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -50,7 +58,7 @@ export default async function CategoryPage({
           </p>
           <p className="mt-4 inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-sm font-medium text-success">
             <ShieldCheck size={16} strokeWidth={2} />
-            Información verificada al {VERIFIED_AT}
+            Información verificada al {verifiedAt}
             <span className="text-muted-foreground">
               · {entries.length}{' '}
               {entries.length === 1 ? 'caso reportado' : 'casos reportados'}
